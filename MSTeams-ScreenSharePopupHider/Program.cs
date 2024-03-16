@@ -1,7 +1,6 @@
 using System;
 using System.Drawing;
 using System.Reflection;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Win32;
 using MSTeams.ScreenSharePopupHider.Helpers;
@@ -10,7 +9,7 @@ namespace MSTeams.ScreenSharePopupHider
 {
     internal static class Program
     {
-        static volatile bool applicationExit;
+        static readonly MSTeamsPopupHider msTeamsPopupHider = new MSTeamsPopupHider();
 
         /// <summary>
         /// The main entry point for the application.
@@ -26,15 +25,16 @@ namespace MSTeams.ScreenSharePopupHider
 
         private static void Startup()
         {
-            CheckAutoStartup();
+            HandleStartup();
             StartApplication();
         }
 
-        private static void CheckAutoStartup()
+        private static void HandleStartup()
         {
             using (var appRegistryKey = Registry.CurrentUser.CreateSubKey("Software\\MSTeamsSSPH", true))
             {
                 AutoStartupHelper.CheckAutoStartup(appRegistryKey, "MSTeamsSSPH");
+                msTeamsPopupHider.ParticipantsHideBehaviour = (HideBehaviour)appRegistryKey.GetValue("ParticipantsHideBehaviour", 0)!;
             }
         }
 
@@ -45,29 +45,70 @@ namespace MSTeams.ScreenSharePopupHider
             startupForm.Show();
 
             var notifyIcon = new AppNotifyIcon();
-            _ = CheckForSharePopup(notifyIcon.TrayIcon);
+            var participantsWindowOptionsMenu = CreateParticipantsWindowOptionsMenu();
+            notifyIcon.AddMenuItem(participantsWindowOptionsMenu);
+
+            msTeamsPopupHider.StartMonitoring(notifyIcon.TrayIcon);
 
             Application.Run();
 
             notifyIcon.Dispose();
-
-            applicationExit = true;
+            msTeamsPopupHider.StopMonitoring();
         }
 
-        private static async Task CheckForSharePopup(NotifyIcon trayIcon)
+        private static ToolStripMenuItem CreateParticipantsWindowOptionsMenu()
         {
-            const int nextCheckDelay = 3000;
-            while (!applicationExit)
-            {
-                await Task.Delay(nextCheckDelay);
+            var optionsMenuItem = new ToolStripMenuItem("Participants Window Behavior");
 
-                var controlBarWindowHandle = Win32.FindWindow("TeamsWebView", "Sharing control bar | Microsoft Teams");
-                if (controlBarWindowHandle != IntPtr.Zero && Win32.IsWindowVisible(controlBarWindowHandle))
-                {
-                    trayIcon.ShowBalloonTip(5000, "MSTeams-ScreenSharePopupHider", "Dealt with that pesky popup for you! :)", ToolTipIcon.Info);
-                    Win32.HideWindow(controlBarWindowHandle);
-                }
+            var noneItem = new ToolStripMenuItem("None");
+            var hideFromTaskbarItem = new ToolStripMenuItem("Hide from taskbar");
+            var hideCompletelyItem = new ToolStripMenuItem("Hide completely");
+
+            noneItem.Click += noneItem_Click;
+            hideFromTaskbarItem.Click += hideFromTaskbarItem_Click;
+            hideCompletelyItem.Click += hideCompletelyItem_Click;
+
+            var dropDownItems = optionsMenuItem.DropDownItems;
+            dropDownItems.Add(hideCompletelyItem);
+            dropDownItems.Add(hideFromTaskbarItem);
+            dropDownItems.Add(noneItem);
+
+            var itemToCheckIndex = 2 - (int)msTeamsPopupHider.ParticipantsHideBehaviour;
+            var itemToCheck = (ToolStripMenuItem)dropDownItems[itemToCheckIndex];
+            itemToCheck.Checked = true;
+
+            return optionsMenuItem;
+        }
+
+        private static void hideCompletelyItem_Click(object? sender, EventArgs e)
+        {
+            UpdatedCheckedState(sender, HideBehaviour.HideCompletely);
+        }
+
+        private static void hideFromTaskbarItem_Click(object? sender, EventArgs e)
+        {
+            UpdatedCheckedState(sender, HideBehaviour.HideFromTaskbar);
+        }
+
+        private static void noneItem_Click(object? sender, EventArgs e)
+        {
+            UpdatedCheckedState(sender, HideBehaviour.None);
+        }
+
+        private static void UpdatedCheckedState(object? sender, HideBehaviour newHideBehaviour)
+        {
+            using (var appRegistryKey = Registry.CurrentUser.CreateSubKey("Software\\MSTeamsSSPH", true))
+            {
+                appRegistryKey.SetValue("ParticipantsHideBehaviour", (int)newHideBehaviour, RegistryValueKind.DWord);
             }
+            msTeamsPopupHider.ParticipantsHideBehaviour = newHideBehaviour;
+
+            var clickedItem = (ToolStripMenuItem)sender!;
+            foreach (ToolStripMenuItem childItem in clickedItem.GetCurrentParent().Items)
+            {
+                childItem.Checked = false;
+            }
+            clickedItem.Checked = true;
         }
     }
 }

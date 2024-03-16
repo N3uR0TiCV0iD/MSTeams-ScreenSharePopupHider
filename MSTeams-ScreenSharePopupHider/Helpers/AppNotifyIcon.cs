@@ -64,6 +64,19 @@ namespace MSTeams.ScreenSharePopupHider.Helpers
             exitMenuItem.Click += exitMenuItem_Click;
         }
 
+        public void AddMenuItem(ToolStripMenuItem menuItem)
+        {
+            var items = contextMenu.Items;
+            var insertIndex = items.Count - 2;
+            if (insertIndex == 0)
+            {
+                //It is the first item being added.
+                //Add a separator between the "custom" and "default" options
+                items.Insert(0, new ToolStripSeparator());
+            }
+            items.Insert(insertIndex, menuItem);
+        }
+
         private void aboutMenuItem_Click(object? sender, EventArgs e)
         {
             var aboutText =
