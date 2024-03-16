@@ -1,0 +1,617 @@
+# Rules in this file were initially inferred by Visual Studio IntelliCode from the C:\Users\Patrick\Documents\Visual Studio 2022\Projects\ClockingSystemReminder codebase based on best match to current usage at 15/02/2023
+# You can modify the rules from these initially generated values to suit your own policies
+# You can learn more about editorconfig here: https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-code-style-settings-reference
+[*.cs]
+
+# Even more info here: https://www.jetbrains.com/help/resharper/EditorConfig_Index.html :)
+
+#================================
+#Formatting - Indentation options
+#================================
+
+#use soft tabs (spaces) for indentation
+indent_style = space
+
+#indent switch labels
+csharp_indent_switch_labels = true
+
+#indent case contents
+csharp_indent_case_contents = true:suggestion
+
+#make sure every file ends with a new line at the end
+insert_final_newline = true
+
+#=============================
+#Formatting - New line options
+#=============================
+
+#place catch statements on a new line
+csharp_new_line_before_catch = true
+
+#place else statements on a new line
+csharp_new_line_before_else = true
+
+#require finally statements to be on a new line after the closing brace
+csharp_new_line_before_finally = true
+
+#require members of anonymous types to be on separate lines
+csharp_new_line_before_members_in_anonymous_types = true
+
+#require members of object intializers to be on separate lines
+csharp_new_line_before_members_in_object_initializers = true
+
+#require braces to be on a new line (also known as "Allman" style) for: properties, object_collection_array_initializers, types, control_blocks, lambdas, methods, and anonymous_types
+csharp_new_line_before_open_brace = all
+
+#===================================
+#Formatting - Organize using options
+#===================================
+
+#sort System.* using directives alphabetically, and place them before other usings
+dotnet_sort_system_directives_first = true
+
+#============================
+#Formatting - Spacing options
+#============================
+
+#require NO space between a cast and the value
+csharp_space_after_cast = false
+
+#require a space before the colon for bases or interfaces in a type declaration
+csharp_space_after_colon_in_inheritance_clause = true
+
+#require a space after a keyword in a control flow statement such as a for loop
+csharp_space_after_keywords_in_control_flow_statements = true
+
+#require a space before the colon for bases or interfaces in a type declaration
+csharp_space_before_colon_in_inheritance_clause = true
+
+#remove space within empty argument list parentheses
+csharp_space_between_method_call_empty_parameter_list_parentheses = false
+
+#remove space between method call name and opening parenthesis
+csharp_space_between_method_call_name_and_opening_parenthesis = false
+
+#do not place space characters after the opening parenthesis and before the closing parenthesis of a method call
+csharp_space_between_method_call_parameter_list_parentheses = false
+
+#remove space within empty parameter list parentheses for a method declaration
+csharp_space_between_method_declaration_empty_parameter_list_parentheses = false
+
+#place a space character after the opening parenthesis and before the closing parenthesis of a method declaration parameter list.
+csharp_space_between_method_declaration_parameter_list_parentheses = false
+
+#=============================
+#Formatting - Wrapping options
+#=============================
+
+#leave code block on single line
+csharp_preserve_single_line_blocks = true
+
+#==============================
+#Style - Code block preferences
+#==============================
+
+#prefer curly braces even for one line of code
+csharp_prefer_braces = true:suggestion
+
+#========================================
+#Style - Expression bodied member options
+#========================================
+
+#prefer expression-bodied members for accessors
+csharp_style_expression_bodied_accessors = true:suggestion
+
+#prefer block bodies for methods
+csharp_style_expression_bodied_methods = false:suggestion
+
+#prefer expression-bodied members for properties
+csharp_style_expression_bodied_properties = true:suggestion
+
+#================================
+#Style - Expression level options
+#================================
+
+#prefer the language keyword for member access expressions, instead of the type name, for types that have a keyword to represent them
+dotnet_style_predefined_type_for_member_access = true:suggestion
+
+#prefer default over default(T)
+csharp_prefer_simple_default_expression = false:suggestion
+
+#prefer objects to be initialized using object initializers when possible
+dotnet_style_object_initializer = true:suggestion
+
+#prefer inferred anonymous type member names
+dotnet_style_prefer_inferred_anonymous_type_member_names = false:suggestion
+
+#===================================
+#Style - Implicit and explicit types
+#===================================
+
+#prefer var over explicit type in all cases, unless overridden by another code style rule
+csharp_style_var_elsewhere = true:suggestion
+
+#prefer var is used to declare variables with built-in system types such as int
+csharp_style_var_for_built_in_types = true:suggestion
+
+#prefer var when the type is already mentioned on the right-hand side of a declaration expression
+csharp_style_var_when_type_is_apparent = true:suggestion
+
+#===================================================
+#Style - language keyword and framework type options
+#===================================================
+
+#prefer the language keyword for local variables, method parameters, and class members, instead of the type name, for types that have a keyword to represent them
+dotnet_style_predefined_type_for_locals_parameters_members = true:suggestion
+
+#========================
+#Style - Modifier options
+#========================
+
+#prefer accessibility modifiers to be declared except for public interface members. This will currently not differ from always and will act as future proofing for if C# adds default interface methods.
+dotnet_style_require_accessibility_modifiers = for_non_interface_members:none
+
+#============================
+#Style - Modifier preferences
+#============================
+
+#when this rule is set to a list of modifiers, prefer the specified ordering.
+csharp_preferred_modifier_order = public,protected,private,static,async,readonly,override,abstract,sealed:suggestion
+
+#========================
+#Style - Pattern matching
+#========================
+
+#prefer pattern matching instead of is expression with type casts
+csharp_style_pattern_matching_over_as_with_null_check = true:suggestion
+
+#=============================
+#Style - Qualification options
+#=============================
+
+#prefer fields not to be prefaced with this. or Me. in Visual Basic
+dotnet_style_qualification_for_field = false:suggestion
+
+#prefer methods not to be prefaced with this. or Me. in Visual Basic
+dotnet_style_qualification_for_method = false:suggestion
+
+#prefer properties not to be prefaced with this. or Me. in Visual Basic
+dotnet_style_qualification_for_property = true:suggestion
+
+#=============================
+#Style - StyleCop options
+#=============================
+# SA1000: Keywords should be spaced correctly
+# Example: new()
+dotnet_diagnostic.SA1000.severity = none
+
+# SA1001: Commas should be spaced correctly
+dotnet_diagnostic.SA1001.severity = error
+
+# SA1003: Symbols should be spaced correctly
+dotnet_diagnostic.SA1003.severity = error
+
+# SA1005: Single line comments should begin with single space
+dotnet_diagnostic.SA1005.severity = suggestion
+
+# SA1009: Closing parenthesis should be spaced correctly
+dotnet_diagnostic.SA1009.severity = none
+
+# SA1011: Closing square brackets should be spaced correctly
+dotnet_diagnostic.SA1011.severity = none
+
+# SA1012: Opening braces should be spaced correctly
+dotnet_diagnostic.SA1012.severity = error
+
+# SA1024: Colons Should Be Spaced Correctly
+dotnet_diagnostic.SA1024.severity = error
+
+# SA1025: Code should not contain multiple whitespace in a row
+dotnet_diagnostic.SA1025.severity = none
+
+# SA1028: Code should not contain trailing whitespace
+dotnet_diagnostic.SA1028.severity = error
+
+# SA1100: Do not prefix calls with base unless local implementation exists
+dotnet_diagnostic.SA1100.severity = none
+
+# SA1101: Prefix local calls with this
+dotnet_diagnostic.SA1101.severity = none
+
+# SA1108: Block statements should not contain embedded comments
+dotnet_diagnostic.SA1108.severity = none
+
+# SA1110: Opening parenthesis or bracket should be on declaration line
+#TODO: Enable after .NET 7.0 migration!
+#dotnet_diagnostic.SA1110.severity = error
+
+# SA1111: Closing parenthesis should be on line of last parameter
+dotnet_diagnostic.SA1111.severity = none
+
+# SA1116: Split parameters should start on line after declaration
+dotnet_diagnostic.SA1116.severity = none
+
+# SA1117: Parameters should be on same line or separate lines
+dotnet_diagnostic.SA1117.severity = none
+
+# SA1118: Parameter should not span multiple lines
+dotnet_diagnostic.SA1118.severity = none
+
+# SA1121: Use built-in type alias
+dotnet_diagnostic.SA1121.severity = error
+
+# SA1122: Use string.Empty for empty strings
+dotnet_diagnostic.SA1122.severity = suggestion
+
+# SA1127: Generic type constraints should be on their own line
+dotnet_diagnostic.SA1127.severity = none
+
+# SA1128: Put constructor initializers on their own line
+dotnet_diagnostic.SA1128.severity = none
+
+# SA1130: Use lambda syntax
+dotnet_diagnostic.SA1130.severity = error
+
+# SA1134: Attributes should not share line
+dotnet_diagnostic.SA1134.severity = error
+
+# SA1135: Using directives should be qualified
+dotnet_diagnostic.SA1135.severity = suggestion
+
+# SA1200: Using directives should be placed correctly
+dotnet_diagnostic.SA1200.severity = none
+
+# SA1201: Elements should appear in the correct order
+dotnet_diagnostic.SA1201.severity = none
+
+# SA1202: Elements should be ordered by access
+dotnet_diagnostic.SA1202.severity = none
+
+# SA1203: Constants should appear before fields
+dotnet_diagnostic.SA1203.severity = error
+
+# SA1208: System using directives should be placed before other using directives
+dotnet_diagnostic.SA1208.severity = error
+
+# SA1209: Using alias directives should be placed after other using directives
+dotnet_diagnostic.SA1209.severity = error
+
+# SA1210: Using directives should be ordered alphabetically by namespace
+dotnet_diagnostic.SA1210.severity = error
+
+# SA1211: Using alias directives should be ordered alphabetically by alias name
+dotnet_diagnostic.SA1211.severity = error
+
+# SA1300: Element should begin with upper-case letter
+dotnet_diagnostic.SA1300.severity = error
+
+# SA1310: Field names should not contain underscore
+dotnet_diagnostic.SA1310.severity = none
+
+# SA1314: Type parameter names should begin with T
+dotnet_diagnostic.SA1314.severity = suggestion
+
+# SA1137: Elements should have the same indentation
+dotnet_diagnostic.SA1137.severity = suggestion
+
+# SA1400: Access modifier should be declared
+dotnet_diagnostic.SA1400.severity = none
+
+# SA1401: Fields should be private
+dotnet_diagnostic.SA1401.severity = error
+
+# SA1402: File may only contain a single type
+dotnet_diagnostic.SA1402.severity = suggestion
+
+# SA1413: Use trailing comma in multi-line initializers
+dotnet_diagnostic.SA1413.severity = none
+
+# SA1500: Braces for multi-line statements should not share line
+dotnet_diagnostic.SA1500.severity = error
+
+# SA1502: Element should not be on a single line
+# Example: void SomeAction { }
+dotnet_diagnostic.SA1502.severity = none
+
+# SA1503: Braces should not be omitted
+#dotnet_diagnostic.SA1503.severity = error
+
+# SA1505: Opening braces should not be followed by blank line
+dotnet_diagnostic.SA1505.severity = error
+
+# SA1507: Code should not contain multiple blank lines in a row
+dotnet_diagnostic.SA1507.severity = error
+
+# SA1508: Closing braces should not be preceded by blank line
+dotnet_diagnostic.SA1508.severity = error
+
+# SA1509: Opening braces should not be preceded by blank line
+dotnet_diagnostic.SA1509.severity = suggestion
+
+# SA1512: Single-line comments should not be followed by blank line
+dotnet_diagnostic.SA1512.severity = suggestion
+
+# SA1513: Closing brace should be followed by blank line
+dotnet_diagnostic.SA1513.severity = none
+
+# SA1514: Element documentation header should be preceded by blank line
+dotnet_diagnostic.SA1514.severity = error
+
+# SA1515: Single-line comment should be preceded by blank line
+dotnet_diagnostic.SA1515.severity = none
+
+# SA1516: Elements should be separated by blank line
+dotnet_diagnostic.SA1516.severity = none
+
+# SA1518: Use line endings correctly at end of file
+dotnet_diagnostic.SA1518.severity = error
+
+# SA1600: Elements should be documented
+dotnet_diagnostic.SA1600.severity = none
+
+# SA1601: Partial elements should be documented
+dotnet_diagnostic.SA1601.severity = suggestion
+
+# SA1602: Enumeration items should be documented
+dotnet_diagnostic.SA1602.severity = suggestion
+
+# SA1106: Code should not contain empty statements
+dotnet_diagnostic.SA1106.severity = error
+
+# SA1312: Variable names should begin with lower-case letter
+dotnet_diagnostic.SA1312.severity = error
+
+# SA1612: Element parameter documentation should match element parameters
+dotnet_diagnostic.SA1612.severity = error
+
+# SA1614: Element parameter documentation should have text
+dotnet_diagnostic.SA1614.severity = none #	suggestion ?
+
+# SA1615: Element return value should be documented
+dotnet_diagnostic.SA1615.severity = suggestion
+
+# SA1622: Generic type parameter documentation should have text
+dotnet_diagnostic.SA1622.severity = suggestion
+
+# SA1623: Property summary documentation should match accessors
+dotnet_diagnostic.SA1623.severity = none
+
+# SA1633: File should have header
+dotnet_diagnostic.SA1633.severity = none
+
+# SA1642: Constructor summary documentation should begin with standard text
+dotnet_diagnostic.SA1642.severity = suggestion
+
+# SA1649: File name should match first type name
+dotnet_diagnostic.SA1649.severity = error
+
+# CA1056: URI-like properties should not be strings
+dotnet_diagnostic.CA1056.severity = none
+
+# CA1063: Implement IDisposable Correctly
+dotnet_diagnostic.CA1063.severity = suggestion
+
+# CA1816: Dispose methods should call SuppressFinalize
+dotnet_diagnostic.CA1816.severity = error
+
+# CA1822: Mark members as static
+dotnet_diagnostic.CA1822.severity = suggestion
+
+# CA2007: Consider calling ConfigureAwait on the awaited task
+dotnet_diagnostic.CA2007.severity = none
+
+# CA2016: Forward the 'CancellationToken' parameter to methods that take one
+dotnet_diagnostic.CA2016.severity = error
+
+# CA2227: Collection properties should be read only
+dotnet_diagnostic.CA2227.severity = suggestion
+
+# CA2234: Pass system uri objects instead of strings
+dotnet_diagnostic.CA2234.severity = none
+
+# CA2245: Do not assign a property to itself
+dotnet_diagnostic.CA2245.severity = error
+
+# CS0105: Using directive appeared previously in this namespace
+dotnet_diagnostic.CS0105.severity = error
+
+# CS0436: Type conflicts with imported type
+dotnet_diagnostic.CS0436.severity = error
+
+# CS1570: XML comment has badly formed XML
+dotnet_diagnostic.CS1570.severity = error
+
+# CS1571: XML comment has a duplicate param tag
+dotnet_diagnostic.CS1571.severity = error
+
+# CS1573: Parameter has no matching param tag in the XML comment (but other parameters do)
+dotnet_diagnostic.CS1573.severity = error
+
+# CS1591: Missing XML comment for publicly visible type or member
+dotnet_diagnostic.CS1591.severity = suggestion
+
+### NULLABLE WARNINGS ###
+#=======================#
+# Some of these can be found here: https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-messages/nullable-warnings
+
+# CS8597: Thrown value may be null.
+dotnet_diagnostic.CS8597.severity = error
+
+# CS8600: Converting null literal or possible null value to non-nullable type.
+dotnet_diagnostic.CS8600.severity = error
+
+# CS8601: Possible null reference assignment.
+dotnet_diagnostic.CS8601.severity = error
+
+# CS8602: Dereference of a possibly null reference.
+dotnet_diagnostic.CS8602.severity = error
+
+# CS8603: Possible null reference return.
+dotnet_diagnostic.CS8603.severity = error
+
+# CS8604: Possible null reference argument for parameter.
+dotnet_diagnostic.CS8604.severity = error
+
+# CS8605: Unboxing a possibly null value.
+dotnet_diagnostic.CS8605.severity = error
+
+# CS8607: A possible null value may not be used for a type marked with [NotNull] or [DisallowNull]
+dotnet_diagnostic.CS8607.severity = error
+
+# CS8608: Nullability of reference types in type doesn't match overridden member.
+dotnet_diagnostic.CS8608.severity = error
+
+# CS8609: Nullability of reference types in return type doesn't match overridden member.
+dotnet_diagnostic.CS8609.severity = error
+
+# CS8610: Nullability of reference types in type parameter doesn't match overridden member.
+dotnet_diagnostic.CS8610.severity = error
+
+# CS8611: Nullability of reference types in type parameter doesn't match partial method declaration.
+dotnet_diagnostic.CS8611.severity = error
+
+# CS8612: Nullability of reference types in type doesn't match implicitly implemented member.
+dotnet_diagnostic.CS8612.severity = error
+
+# CS8613: Nullability of reference types in return type doesn't match implicitly implemented member.
+dotnet_diagnostic.CS8613.severity = error
+
+# CS8614: Nullability of reference types in type of parameter doesn't match implicitly implemented member.
+dotnet_diagnostic.CS8614.severity = error
+
+# CS8615: Nullability of reference types in type doesn't match implemented member.
+dotnet_diagnostic.CS8615.severity = error
+
+# CS8616: Nullability of reference types in return type doesn't match implemented member.
+dotnet_diagnostic.CS8616.severity = error
+
+# CS8617: Nullability of reference types in type of parameter doesn't match implemented member.
+dotnet_diagnostic.CS8617.severity = error
+
+# CS8618: Non-nullable variable must contain a non-null value when exiting constructor. Consider declaring it as nullable.
+dotnet_diagnostic.CS8618.severity = error
+
+# CS8619: Nullability of reference types in value doesn't match target type.
+dotnet_diagnostic.CS8619.severity = error
+
+# CS8620: Argument cannot be used for parameter due to differences in the nullability of reference types.
+dotnet_diagnostic.CS8620.severity = error
+
+# CS8621: Nullability of reference types in return type doesn't match the target delegate (possibly because of nullability attributes).
+dotnet_diagnostic.CS8621.severity = error
+
+# CS8622: Nullability of reference types in type of parameter doesn't match the target delegate (possibly because of nullability attributes).
+dotnet_diagnostic.CS8622.severity = error
+
+# CS8624: Argument cannot be used as an output due to differences in the nullability of reference types.
+dotnet_diagnostic.CS8624.severity = error
+
+# CS8625: Cannot convert null literal to non-nullable reference type.
+dotnet_diagnostic.CS8625.severity = error
+
+# CS8629: Nullable value type may be null.
+dotnet_diagnostic.CS8629.severity = error
+
+# CS8631: The type cannot be used as type parameter in the generic type or method. Nullability of type argument doesn't match constraint type.
+dotnet_diagnostic.CS8631.severity = error
+
+# CS8632: The annotation for nullable reference types should only be used in code within a '#nullable' annotations context.
+dotnet_diagnostic.CS8632.severity = error
+
+# CS8633: Nullability in constraints for type parameter of method doesn't match the constraints for type parameter of interface method. Consider using an explicit interface implementation instead.
+dotnet_diagnostic.CS8633.severity = error
+
+# CS8634: The type cannot be used as type parameter in the generic type or method. Nullability of type argument doesn't match 'class' constraint.
+dotnet_diagnostic.CS8634.severity = error
+
+# CS8643: Nullability of reference types in explicit interface specifier doesn't match interface implemented by the type.
+dotnet_diagnostic.CS8643.severity = error
+
+# CS8644: Type does not implement interface member. Nullability of reference types in interface implemented by the base type doesn't match.
+dotnet_diagnostic.CS8644.severity = error
+
+# CS8645: Member is already listed in the interface list on type with different nullability of reference types.
+dotnet_diagnostic.CS8645.severity = error
+
+# CS8764: Nullability of return type doesn't match overridden member (possibly because of nullability attributes).
+dotnet_diagnostic.CS8764.severity = error
+
+# CS8667: Partial method declarations have inconsistent nullability in constraints for type parameter.
+dotnet_diagnostic.CS8667.severity = error
+
+# CS8670: Object or collection initializer implicitly dereferences possibly null member.
+dotnet_diagnostic.CS8670.severity = error
+
+# CS8714: The type cannot be used as type parameter in the generic type or method. Nullability of type argument doesn't match 'notnull' constraint.
+dotnet_diagnostic.CS8714.severity = error
+
+# CS8762: Parameter must have a non-null value when exiting.
+dotnet_diagnostic.CS8762.severity = error
+
+# CS8763: A method marked [DoesNotReturn] should not return.
+dotnet_diagnostic.CS8763.severity = error
+
+# CS8765: Nullability of type of parameter doesn't match overridden member (possibly because of nullability attributes).
+dotnet_diagnostic.CS8765.severity = error
+
+# CS8766: Nullability of reference types in return type of doesn't match implicitly implemented member (possibly because of nullability attributes).
+dotnet_diagnostic.CS8766.severity = error
+
+# CS8767: Nullability of reference types in type of parameter of doesn't match implicitly implemented member (possibly because of nullability attributes).
+dotnet_diagnostic.CS8767.severity = error
+
+# CS8768: Nullability of reference types in return type doesn't match implemented member (possibly because of nullability attributes).
+dotnet_diagnostic.CS8768.severity = error
+
+# CS8769: Nullability of reference types in type of parameter doesn't match implemented member (possibly because of nullability attributes).
+dotnet_diagnostic.CS8769.severity = error
+
+# CS8770: Method lacks [DoesNotReturn] annotation to match implemented or overridden member.
+dotnet_diagnostic.CS8770.severity = error
+
+# CS8774: Member must have a non-null value when exiting.
+dotnet_diagnostic.CS8774.severity = error
+
+# CS8775: Member must have a non-null value when exiting.
+dotnet_diagnostic.CS8775.severity = error
+
+# CS8776: Member cannot be used in this attribute.
+dotnet_diagnostic.CS8776.severity = error
+
+# CS8777: Parameter must have a non-null value when exiting.
+dotnet_diagnostic.CS8777.severity = error
+
+# CS8819: Nullability of reference types in return type doesn't match partial method declaration.
+dotnet_diagnostic.CS8819.severity = error
+
+# CS8824: Parameter must have a non-null value when exiting because parameter is non-null.
+dotnet_diagnostic.CS8824.severity = error
+
+# CS8825: Return value must be non-null because parameter is non-null.
+dotnet_diagnostic.CS8825.severity = error
+
+# CS8847: The switch expression does not handle some null inputs (it is not exhaustive). However, a pattern with a 'when' clause might successfully match this value.
+dotnet_diagnostic.CS8847.severity = error
+
+# CS8655: The switch expression does not handle some null inputs (it is not exhaustive).
+dotnet_diagnostic.CS8655.severity = error
+
+#=======================#
+
+# IDE0004: Remove Unnecessary Cast
+dotnet_diagnostic.IDE0004.severity = error
+
+# IDE0034: Simplify 'default' expression
+dotnet_diagnostic.IDE0034.severity = none
+
+# IDE0040: Add accessibility modifiers
+dotnet_diagnostic.IDE0040.severity = none
+
+# IDE0055: Fix formatting
+dotnet_diagnostic.IDE0055.severity = error
+
+# IDE0058: Expression value is never used
+dotnet_diagnostic.IDE0058.severity = none
+
+# IDE0200: Remove unnecessary lambda expression
+dotnet_diagnostic.IDE0200.severity = suggestion
