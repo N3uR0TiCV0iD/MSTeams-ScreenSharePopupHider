@@ -1,0 +1,75 @@
+name: Build & Release
+
+on:
+  workflow_dispatch:
+
+env:
+  DOTNET_VERSION: 6.0.x
+  PROJECT_NAME: MSTeams-ScreenSharePopupHider
+  PROJECT_FILE: MSTeams-ScreenSharePopupHider\MSTeams-ScreenSharePopupHider.csproj
+
+jobs:
+  build:
+    name: Build and release
+    runs-on: windows-latest
+
+    permissions:
+      contents: write
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 1
+
+    - name: Install .NET ${{ env.DOTNET_VERSION }} SDK
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+
+    - name: Publish application
+      run: >
+        dotnet publish ${{ env.PROJECT_FILE }} -c Release --output ./publish
+        -r win-x64 --self-contained false -p:PublishSingleFile=true
+
+    - name: Delete release files
+      run: |
+        $headers = @{
+          "Authorization" = "token ${{ secrets.GITHUB_TOKEN }}"
+        }
+
+        $releaseURL = "https://api.github.com/repos/${{ github.repository }}/releases/tags/current"
+        try {
+          $releaseResponse = Invoke-RestMethod -Uri $releaseURL -Headers $headers -ErrorAction Stop
+          $releaseId = $releaseResponse.id
+
+          $assetsURL = "https://api.github.com/repos/${{ github.repository }}/releases/$releaseId/assets"
+          $assetsResponse = Invoke-RestMethod -Uri $assetsURL -Headers $headers -ErrorAction Stop
+
+          foreach ($asset in $assetsResponse) {
+            $deleteURL = "https://api.github.com/repos/${{ github.repository }}/releases/assets/$($asset.id)"
+            Invoke-RestMethod -Uri $deleteURL -Method Delete -Headers $headers -ErrorAction Stop
+          }
+        } catch {
+          Write-Host "Error encountered: $_. Exception message: $($_.Exception.Message)"
+          if ($_.Exception.Response.StatusCode -eq 'NotFound') {
+            Write-Host "Release or assets not found. Skipping deletion."
+          } else {
+            throw $_.Exception
+          }
+        }
+      shell: pwsh
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    #NOTE: Adds "upsert" behaviour to the release
+    - name: Create release
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: current
+        name: ${{ env.PROJECT_NAME }}
+        draft: false
+        prerelease: false
+        files: ./publish/${{ env.PROJECT_NAME }}.exe
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
