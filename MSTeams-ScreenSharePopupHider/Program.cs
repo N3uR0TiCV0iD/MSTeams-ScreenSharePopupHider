@@ -104,7 +104,7 @@ namespace MSTeams.ScreenSharePopupHider
             msTeamsPopupHider.ParticipantsHideBehaviour = newHideBehaviour;
 
             var clickedItem = (ToolStripMenuItem)sender!;
-            foreach (ToolStripMenuItem childItem in clickedItem.GetCurrentParent().Items)
+            foreach (ToolStripMenuItem childItem in clickedItem.GetCurrentParent()!.Items)
             {
                 childItem.Checked = false;
             }

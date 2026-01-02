@@ -52,7 +52,7 @@ namespace MSTeams.ScreenSharePopupHider.Helpers
             var labelPos = textLabel.Location;
             this.Width = labelPos.X + textLabel.Width + RIGHT_MARGIN;
 
-            var primaryScreen = Screen.PrimaryScreen;
+            var primaryScreen = Screen.PrimaryScreen!;
             var screenBounds = primaryScreen.WorkingArea;
             this.Location = new Point(screenBounds.Width - this.Width, screenBounds.Height - this.Height);
         }
